@@ -6,9 +6,9 @@ import Navbar1 from "../components/Navbar1";
 import Footer from "../components/footer";
 import { IoArrowBackCircle } from "react-icons/io5";
 import notFoundImage from "../assets/notfound.png"; // Image de secours
-import { faSpinner } from '@fortawesome/free-solid-svg-icons';
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 import { useSelector } from "react-redux";
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const MyFavorites = () => {
   const [favorites, setFavorites] = useState([]);
@@ -21,7 +21,9 @@ const MyFavorites = () => {
   useEffect(() => {
     const fetchFavorites = async () => {
       try {
-        const response = await axios.get(`http://localhost:5000/api/v1/auth/${userId}`);
+        const response = await axios.get(
+          `http://localhost:5000/api/v1/auth/${userId}`
+        );
         setFavorites(response.data.favorites);
       } catch (err) {
         setError(err);
@@ -49,10 +51,22 @@ const MyFavorites = () => {
 
   if (loading) {
     return (
-      <div style={{ textAlign: "center", marginTop: "120px", fontFamily: "Arial, sans-serif" }}>
+      <div
+        style={{
+          textAlign: "center",
+          marginTop: "120px",
+          fontFamily: "Arial, sans-serif",
+        }}
+      >
         <Navbar1 />
-        <div style={{ fontSize: "24px", marginBottom: "20px" }}>Chargement en cours...</div>
-        <FontAwesomeIcon icon={faSpinner} spin style={{ fontSize: "50px", color: "#F27438" }} />
+        <div style={{ fontSize: "24px", marginBottom: "20px" }}>
+          Chargement en cours...
+        </div>
+        <FontAwesomeIcon
+          icon={faSpinner}
+          spin
+          style={{ fontSize: "50px", color: "#F27438" }}
+        />
       </div>
     );
   }
@@ -138,13 +152,29 @@ const MyFavorites = () => {
             paddingBottom: "40px", // Ajout d'un peu de padding en bas pour l'espace sous les cartes
           }}
         >
-          <h1 style={{ textAlign: "center", fontSize: "36px", fontWeight: "bold", marginBottom: "20px" }}>
-             Vos biens favoris
+          <h1
+            style={{
+              textAlign: "center",
+              fontSize: "36px",
+              fontWeight: "bold",
+              marginBottom: "20px",
+            }}
+          >
+            Vos biens favoris
           </h1>
-         
-          <div style={{ display: "flex", flexWrap: "wrap", justifyContent: "center", gap: "20px" }}>
+
+          <div
+            style={{
+              display: "flex",
+              flexWrap: "wrap",
+              justifyContent: "center",
+              gap: "20px",
+            }}
+          >
             {favorites.map((favorite) => {
-              const imageUrls = favorite.images ? favorite.images.map(image => image.url) : [];
+              const imageUrls = favorite.images
+                ? favorite.images.map((image) => image.url)
+                : [];
 
               return (
                 <div
@@ -152,7 +182,10 @@ const MyFavorites = () => {
                   style={{
                     width: "350px",
                     height: "400px",
-                    boxShadow: hoveredHouse === favorite ? "0 0 20px rgba(0, 0, 0, 0.3)" : "0 0 10px rgba(0, 0, 0, 0.1)",
+                    boxShadow:
+                      hoveredHouse === favorite
+                        ? "0 0 20px rgba(0, 0, 0, 0.3)"
+                        : "0 0 10px rgba(0, 0, 0, 0.1)",
                     borderRadius: "10px",
                     overflow: "hidden",
                     position: "relative",
@@ -169,13 +202,21 @@ const MyFavorites = () => {
                       {imageUrls.length > 0 ? (
                         <img
                           src={imageUrls[0]}
-                          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "cover",
+                          }}
                           alt="House"
                         />
                       ) : (
                         <img
                           src={notFoundImage}
-                          style={{ width: "100%", height: "100%", objectFit: "cover" }}
+                          style={{
+                            width: "100%",
+                            height: "100%",
+                            objectFit: "cover",
+                          }}
                           alt="Not found"
                         />
                       )}
@@ -198,7 +239,9 @@ const MyFavorites = () => {
                         }}
                       >
                         <div style={{ display: "flex", alignItems: "center" }}>
-                          <span style={{ marginRight: "5px", color: "#F27438" }}>
+                          <span
+                            style={{ marginRight: "5px", color: "#F27438" }}
+                          >
                             <FaLocationDot />
                           </span>
                           <span>{favorite.wilaya}</span>
